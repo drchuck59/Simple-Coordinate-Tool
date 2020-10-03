@@ -47,14 +47,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="DMShelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DMShelp.Designer.cs">
+      <DependentUpon>DMShelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="DMS_DecDeg.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DMS_DecDeg.designer.cs">
       <DependentUpon>DMS_DecDeg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Location.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DMShelp.resx">
+      <DependentUpon>DMShelp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DMS_DecDeg.resx">
       <DependentUpon>DMS_DecDeg.cs</DependentUpon>
     </EmbeddedResource>

@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.LatDMSDegTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.LonDecTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,18 +45,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.LatSCTTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.ParseSCTInsertButton = new System.Windows.Forms.Button();
             this.PasteButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.NSComboBox = new System.Windows.Forms.ComboBox();
-            this.LatDMSMinTextBox = new System.Windows.Forms.TextBox();
-            this.LatDMSSecTextBox = new System.Windows.Forms.TextBox();
-            this.LonDMSSecTextBox = new System.Windows.Forms.TextBox();
-            this.LonDMSMinTextBox = new System.Windows.Forms.TextBox();
-            this.EWComboBox = new System.Windows.Forms.ComboBox();
-            this.LonDMSDegTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.DMSHelpButton = new System.Windows.Forms.Button();
+            this.LatDMSTextBox = new System.Windows.Forms.TextBox();
+            this.LonDMSTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -69,18 +63,6 @@
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "DMS Latitude ";
-            // 
-            // LatDMSDegTextBox
-            // 
-            this.LatDMSDegTextBox.Location = new System.Drawing.Point(76, 56);
-            this.LatDMSDegTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LatDMSDegTextBox.MaxLength = 2;
-            this.LatDMSDegTextBox.Name = "LatDMSDegTextBox";
-            this.LatDMSDegTextBox.Size = new System.Drawing.Size(33, 20);
-            this.LatDMSDegTextBox.TabIndex = 2;
-            this.LatDMSDegTextBox.DoubleClick += new System.EventHandler(this.LatDMSTextBox_DoubleClick);
-            this.LatDMSDegTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LatDMSDegTextBox_KeyPress);
-            this.LatDMSDegTextBox.Validated += new System.EventHandler(this.LatDMSDegTextBox_Validated);
             // 
             // label2
             // 
@@ -144,6 +126,7 @@
             this.DMSTextBox.Size = new System.Drawing.Size(222, 20);
             this.DMSTextBox.TabIndex = 15;
             this.DMSTextBox.DoubleClick += new System.EventHandler(this.DMSTextBox_DoubleClick);
+            this.DMSTextBox.Validated += new System.EventHandler(this.DMSTextBox_Validated);
             // 
             // label5
             // 
@@ -151,9 +134,9 @@
             this.label5.Location = new System.Drawing.Point(29, 153);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.Size = new System.Drawing.Size(138, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "DMS Coordinates";
+            this.label5.Text = "DMS Coordinates (Lat, Lon)";
             // 
             // label6
             // 
@@ -161,9 +144,9 @@
             this.label6.Location = new System.Drawing.Point(262, 153);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.Size = new System.Drawing.Size(152, 13);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Decimal Coordinates";
+            this.label6.Text = "Decimal Coordinates (Lat, Lon)";
             // 
             // DECTextBox
             // 
@@ -173,6 +156,7 @@
             this.DECTextBox.Size = new System.Drawing.Size(222, 20);
             this.DECTextBox.TabIndex = 16;
             this.DECTextBox.DoubleClick += new System.EventHandler(this.DECTextBox_DoubleClick);
+            this.DECTextBox.Validated += new System.EventHandler(this.DECTextBox_Validated);
             // 
             // label7
             // 
@@ -192,6 +176,7 @@
             this.SCTTextBox.Size = new System.Drawing.Size(222, 20);
             this.SCTTextBox.TabIndex = 17;
             this.SCTTextBox.DoubleClick += new System.EventHandler(this.SCTTextBox_DoubleClick);
+            this.SCTTextBox.Validated += new System.EventHandler(this.SCTTextBox_Validated);
             // 
             // LonSCTTextBox
             // 
@@ -235,18 +220,6 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Latitude SCT";
             // 
-            // ParseSCTInsertButton
-            // 
-            this.ParseSCTInsertButton.Location = new System.Drawing.Point(614, 132);
-            this.ParseSCTInsertButton.Margin = new System.Windows.Forms.Padding(2);
-            this.ParseSCTInsertButton.Name = "ParseSCTInsertButton";
-            this.ParseSCTInsertButton.Size = new System.Drawing.Size(95, 34);
-            this.ParseSCTInsertButton.TabIndex = 14;
-            this.ParseSCTInsertButton.Text = "Convert this SCT\r\nto other formats";
-            this.toolTip1.SetToolTip(this.ParseSCTInsertButton, "Parses line below to ALL boxes and copies Decimal Lat/Lon to clipboard");
-            this.ParseSCTInsertButton.UseVisualStyleBackColor = true;
-            this.ParseSCTInsertButton.Click += new System.EventHandler(this.ParseSCTInsertButton_Click);
-            // 
             // PasteButton
             // 
             this.PasteButton.Location = new System.Drawing.Point(490, 114);
@@ -271,85 +244,6 @@
             this.label10.TabIndex = 20;
             this.label10.Text = "Double click any textbox to \r\ncopy that textbox to clipboard";
             // 
-            // NSComboBox
-            // 
-            this.NSComboBox.FormattingEnabled = true;
-            this.NSComboBox.Items.AddRange(new object[] {
-            "N",
-            "S"});
-            this.NSComboBox.Location = new System.Drawing.Point(26, 56);
-            this.NSComboBox.Name = "NSComboBox";
-            this.NSComboBox.Size = new System.Drawing.Size(40, 21);
-            this.NSComboBox.TabIndex = 1;
-            this.NSComboBox.Validated += new System.EventHandler(this.NSComboBox_Validated);
-            // 
-            // LatDMSMinTextBox
-            // 
-            this.LatDMSMinTextBox.Location = new System.Drawing.Point(112, 56);
-            this.LatDMSMinTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LatDMSMinTextBox.MaxLength = 2;
-            this.LatDMSMinTextBox.Name = "LatDMSMinTextBox";
-            this.LatDMSMinTextBox.Size = new System.Drawing.Size(25, 20);
-            this.LatDMSMinTextBox.TabIndex = 3;
-            this.LatDMSMinTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LatDMSMinTextBox_KeyPress);
-            this.LatDMSMinTextBox.Validated += new System.EventHandler(this.LatDMSMinTextBox_Validated);
-            // 
-            // LatDMSSecTextBox
-            // 
-            this.LatDMSSecTextBox.Location = new System.Drawing.Point(140, 56);
-            this.LatDMSSecTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LatDMSSecTextBox.MaxLength = 7;
-            this.LatDMSSecTextBox.Name = "LatDMSSecTextBox";
-            this.LatDMSSecTextBox.Size = new System.Drawing.Size(43, 20);
-            this.LatDMSSecTextBox.TabIndex = 4;
-            this.LatDMSSecTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LatDMSSecTextBox_KeyPress);
-            this.LatDMSSecTextBox.Validated += new System.EventHandler(this.LatDMSSecTextBox_Validated);
-            // 
-            // LonDMSSecTextBox
-            // 
-            this.LonDMSSecTextBox.Location = new System.Drawing.Point(140, 97);
-            this.LonDMSSecTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LonDMSSecTextBox.MaxLength = 7;
-            this.LonDMSSecTextBox.Name = "LonDMSSecTextBox";
-            this.LonDMSSecTextBox.Size = new System.Drawing.Size(43, 20);
-            this.LonDMSSecTextBox.TabIndex = 8;
-            this.LonDMSSecTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LonDMSSecTextBox_KeyPress);
-            this.LonDMSSecTextBox.Validated += new System.EventHandler(this.LonDMSSecTextBox_Validated);
-            // 
-            // LonDMSMinTextBox
-            // 
-            this.LonDMSMinTextBox.Location = new System.Drawing.Point(112, 97);
-            this.LonDMSMinTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LonDMSMinTextBox.MaxLength = 2;
-            this.LonDMSMinTextBox.Name = "LonDMSMinTextBox";
-            this.LonDMSMinTextBox.Size = new System.Drawing.Size(25, 20);
-            this.LonDMSMinTextBox.TabIndex = 7;
-            this.LonDMSMinTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LonDMSMinTextBox_KeyPress);
-            this.LonDMSMinTextBox.Validated += new System.EventHandler(this.LonDMSMinTextBox_Validated);
-            // 
-            // EWComboBox
-            // 
-            this.EWComboBox.FormattingEnabled = true;
-            this.EWComboBox.Items.AddRange(new object[] {
-            "W",
-            "E"});
-            this.EWComboBox.Location = new System.Drawing.Point(26, 97);
-            this.EWComboBox.Name = "EWComboBox";
-            this.EWComboBox.Size = new System.Drawing.Size(40, 21);
-            this.EWComboBox.TabIndex = 5;
-            this.EWComboBox.Validated += new System.EventHandler(this.EWComboBox_Validated);
-            // 
-            // LonDMSDegTextBox
-            // 
-            this.LonDMSDegTextBox.Location = new System.Drawing.Point(76, 97);
-            this.LonDMSDegTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.LonDMSDegTextBox.MaxLength = 3;
-            this.LonDMSDegTextBox.Name = "LonDMSDegTextBox";
-            this.LonDMSDegTextBox.Size = new System.Drawing.Size(33, 20);
-            this.LonDMSDegTextBox.TabIndex = 6;
-            this.LonDMSDegTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LonDMSDegTextBox_KeyPress);
-            this.LonDMSDegTextBox.Validated += new System.EventHandler(this.LonDMSDegTextBox_Validated);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -362,23 +256,47 @@
             this.label11.TabIndex = 28;
             this.label11.Text = "Hover over text boxes for format";
             // 
+            // DMSHelpButton
+            // 
+            this.DMSHelpButton.BackColor = System.Drawing.Color.Violet;
+            this.DMSHelpButton.Location = new System.Drawing.Point(162, 142);
+            this.DMSHelpButton.Name = "DMSHelpButton";
+            this.DMSHelpButton.Size = new System.Drawing.Size(20, 24);
+            this.DMSHelpButton.TabIndex = 29;
+            this.DMSHelpButton.Text = "?";
+            this.DMSHelpButton.UseVisualStyleBackColor = false;
+            this.DMSHelpButton.Click += new System.EventHandler(this.DMSHelpButton_Click);
+            // 
+            // LatDMSTextBox
+            // 
+            this.LatDMSTextBox.Location = new System.Drawing.Point(29, 56);
+            this.LatDMSTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.LatDMSTextBox.Name = "LatDMSTextBox";
+            this.LatDMSTextBox.Size = new System.Drawing.Size(153, 20);
+            this.LatDMSTextBox.TabIndex = 30;
+            this.LatDMSTextBox.Validated += new System.EventHandler(this.LatDMSTextBox_Validated);
+            // 
+            // LonDMSTextBox
+            // 
+            this.LonDMSTextBox.Location = new System.Drawing.Point(29, 97);
+            this.LonDMSTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.LonDMSTextBox.Name = "LonDMSTextBox";
+            this.LonDMSTextBox.Size = new System.Drawing.Size(153, 20);
+            this.LonDMSTextBox.TabIndex = 31;
+            this.LonDMSTextBox.Validated += new System.EventHandler(this.LonDMSTextBox_Validated);
+            // 
             // DMS_DecDeg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
             this.ClientSize = new System.Drawing.Size(731, 203);
+            this.Controls.Add(this.LonDMSTextBox);
+            this.Controls.Add(this.LatDMSTextBox);
+            this.Controls.Add(this.DMSHelpButton);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.LonDMSSecTextBox);
-            this.Controls.Add(this.LonDMSMinTextBox);
-            this.Controls.Add(this.EWComboBox);
-            this.Controls.Add(this.LonDMSDegTextBox);
-            this.Controls.Add(this.LatDMSSecTextBox);
-            this.Controls.Add(this.LatDMSMinTextBox);
-            this.Controls.Add(this.NSComboBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.PasteButton);
-            this.Controls.Add(this.ParseSCTInsertButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.SCTTextBox);
             this.Controls.Add(this.LonSCTTextBox);
@@ -394,7 +312,6 @@
             this.Controls.Add(this.LatDecTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.LatDMSDegTextBox);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "DMS_DecDeg";
@@ -407,7 +324,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox LatDMSDegTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox LonDecTextBox;
         private System.Windows.Forms.Label label3;
@@ -423,17 +339,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox LatSCTTextBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button ParseSCTInsertButton;
         private System.Windows.Forms.Button PasteButton;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ComboBox NSComboBox;
-        private System.Windows.Forms.TextBox LatDMSMinTextBox;
-        private System.Windows.Forms.TextBox LatDMSSecTextBox;
-        private System.Windows.Forms.TextBox LonDMSSecTextBox;
-        private System.Windows.Forms.TextBox LonDMSMinTextBox;
-        private System.Windows.Forms.ComboBox EWComboBox;
-        private System.Windows.Forms.TextBox LonDMSDegTextBox;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button DMSHelpButton;
+        private System.Windows.Forms.TextBox LatDMSTextBox;
+        private System.Windows.Forms.TextBox LonDMSTextBox;
     }
 }
