@@ -48,10 +48,10 @@
             this.PasteButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label11 = new System.Windows.Forms.Label();
             this.DMSHelpButton = new System.Windows.Forms.Button();
             this.LatDMSTextBox = new System.Windows.Forms.TextBox();
             this.LonDMSTextBox = new System.Windows.Forms.TextBox();
+            this.ResetButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +80,7 @@
             this.LonDecTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LonDecTextBox.Name = "LonDecTextBox";
             this.LonDecTextBox.Size = new System.Drawing.Size(119, 20);
-            this.LonDecTextBox.TabIndex = 10;
+            this.LonDecTextBox.TabIndex = 4;
             this.toolTip1.SetToolTip(this.LonDecTextBox, "(+/-)DDD.dddd");
             this.LonDecTextBox.DoubleClick += new System.EventHandler(this.LonDecTextBox_DoubleClick);
             this.LonDecTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LonDecTextBox_KeyPress);
@@ -102,7 +102,7 @@
             this.LatDecTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LatDecTextBox.Name = "LatDecTextBox";
             this.LatDecTextBox.Size = new System.Drawing.Size(119, 20);
-            this.LatDecTextBox.TabIndex = 9;
+            this.LatDecTextBox.TabIndex = 3;
             this.toolTip1.SetToolTip(this.LatDecTextBox, " (+/-)DD.dddd");
             this.LatDecTextBox.DoubleClick += new System.EventHandler(this.LatDecTextBox_DoubleClick);
             this.LatDecTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LatDecTextBox_KeyPress);
@@ -124,7 +124,7 @@
             this.DMSTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.DMSTextBox.Name = "DMSTextBox";
             this.DMSTextBox.Size = new System.Drawing.Size(222, 20);
-            this.DMSTextBox.TabIndex = 15;
+            this.DMSTextBox.TabIndex = 7;
             this.DMSTextBox.DoubleClick += new System.EventHandler(this.DMSTextBox_DoubleClick);
             this.DMSTextBox.Validated += new System.EventHandler(this.DMSTextBox_Validated);
             // 
@@ -154,7 +154,7 @@
             this.DECTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.DECTextBox.Name = "DECTextBox";
             this.DECTextBox.Size = new System.Drawing.Size(222, 20);
-            this.DECTextBox.TabIndex = 16;
+            this.DECTextBox.TabIndex = 8;
             this.DECTextBox.DoubleClick += new System.EventHandler(this.DECTextBox_DoubleClick);
             this.DECTextBox.Validated += new System.EventHandler(this.DECTextBox_Validated);
             // 
@@ -174,7 +174,7 @@
             this.SCTTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.SCTTextBox.Name = "SCTTextBox";
             this.SCTTextBox.Size = new System.Drawing.Size(222, 20);
-            this.SCTTextBox.TabIndex = 17;
+            this.SCTTextBox.TabIndex = 9;
             this.SCTTextBox.DoubleClick += new System.EventHandler(this.SCTTextBox_DoubleClick);
             this.SCTTextBox.Validated += new System.EventHandler(this.SCTTextBox_Validated);
             // 
@@ -184,7 +184,7 @@
             this.LonSCTTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LonSCTTextBox.Name = "LonSCTTextBox";
             this.LonSCTTextBox.Size = new System.Drawing.Size(119, 20);
-            this.LonSCTTextBox.TabIndex = 12;
+            this.LonSCTTextBox.TabIndex = 6;
             this.toolTip1.SetToolTip(this.LonSCTTextBox, "(W/E)DDD.MM.DD.ddd");
             this.LonSCTTextBox.DoubleClick += new System.EventHandler(this.LonSCTTextBox_DoubleClick);
             this.LonSCTTextBox.Validated += new System.EventHandler(this.LonSCTTextBox_Validated);
@@ -205,7 +205,7 @@
             this.LatSCTTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LatSCTTextBox.Name = "LatSCTTextBox";
             this.LatSCTTextBox.Size = new System.Drawing.Size(119, 20);
-            this.LatSCTTextBox.TabIndex = 11;
+            this.LatSCTTextBox.TabIndex = 5;
             this.toolTip1.SetToolTip(this.LatSCTTextBox, "(N/S)DDD.MM.DD.ddd");
             this.LatSCTTextBox.DoubleClick += new System.EventHandler(this.LatSCTTextBox_DoubleClick);
             this.LatSCTTextBox.Validated += new System.EventHandler(this.LatSCTTextBox_Validated);
@@ -222,11 +222,11 @@
             // 
             // PasteButton
             // 
-            this.PasteButton.Location = new System.Drawing.Point(490, 114);
+            this.PasteButton.Location = new System.Drawing.Point(610, 129);
             this.PasteButton.Margin = new System.Windows.Forms.Padding(2);
             this.PasteButton.Name = "PasteButton";
             this.PasteButton.Size = new System.Drawing.Size(99, 37);
-            this.PasteButton.TabIndex = 13;
+            this.PasteButton.TabIndex = 0;
             this.PasteButton.Text = "  Paste to\r\nSCT Textbox";
             this.toolTip1.SetToolTip(this.PasteButton, "Pastes clipboard to line below");
             this.PasteButton.UseVisualStyleBackColor = true;
@@ -237,24 +237,12 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.PowderBlue;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(528, 9);
+            this.label10.Location = new System.Drawing.Point(29, 5);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(192, 34);
+            this.label10.Size = new System.Drawing.Size(367, 17);
             this.label10.TabIndex = 20;
-            this.label10.Text = "Double click any textbox to \r\ncopy that textbox to clipboard";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.PowderBlue;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(204, 9);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(210, 17);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Hover over text boxes for format";
+            this.label10.Text = "Double click any textbox to copy that textbox to clipboard.";
             // 
             // DMSHelpButton
             // 
@@ -262,7 +250,7 @@
             this.DMSHelpButton.Location = new System.Drawing.Point(162, 142);
             this.DMSHelpButton.Name = "DMSHelpButton";
             this.DMSHelpButton.Size = new System.Drawing.Size(20, 24);
-            this.DMSHelpButton.TabIndex = 29;
+            this.DMSHelpButton.TabIndex = 20;
             this.DMSHelpButton.Text = "?";
             this.DMSHelpButton.UseVisualStyleBackColor = false;
             this.DMSHelpButton.Click += new System.EventHandler(this.DMSHelpButton_Click);
@@ -273,7 +261,7 @@
             this.LatDMSTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LatDMSTextBox.Name = "LatDMSTextBox";
             this.LatDMSTextBox.Size = new System.Drawing.Size(153, 20);
-            this.LatDMSTextBox.TabIndex = 30;
+            this.LatDMSTextBox.TabIndex = 1;
             this.LatDMSTextBox.Validated += new System.EventHandler(this.LatDMSTextBox_Validated);
             // 
             // LonDMSTextBox
@@ -282,8 +270,20 @@
             this.LonDMSTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LonDMSTextBox.Name = "LonDMSTextBox";
             this.LonDMSTextBox.Size = new System.Drawing.Size(153, 20);
-            this.LonDMSTextBox.TabIndex = 31;
+            this.LonDMSTextBox.TabIndex = 2;
             this.LonDMSTextBox.Validated += new System.EventHandler(this.LonDMSTextBox_Validated);
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(497, 57);
+            this.ResetButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(77, 45);
+            this.ResetButton.TabIndex = 29;
+            this.ResetButton.Text = "Reset all text boxes";
+            this.toolTip1.SetToolTip(this.ResetButton, "Pastes clipboard to line below");
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // DMS_DecDeg
             // 
@@ -291,10 +291,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
             this.ClientSize = new System.Drawing.Size(731, 203);
+            this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.LonDMSTextBox);
             this.Controls.Add(this.LatDMSTextBox);
             this.Controls.Add(this.DMSHelpButton);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.PasteButton);
             this.Controls.Add(this.label7);
@@ -342,9 +342,9 @@
         private System.Windows.Forms.Button PasteButton;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button DMSHelpButton;
         private System.Windows.Forms.TextBox LatDMSTextBox;
         private System.Windows.Forms.TextBox LonDMSTextBox;
+        private System.Windows.Forms.Button ResetButton;
     }
 }

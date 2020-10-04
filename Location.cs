@@ -66,10 +66,12 @@ namespace SimpleCoordTranslator
                     if (TryDecDeg2(input)) return true;
                     break;
                 case 1:
+                    if (TryLatLonDMS(input)) return true;
                     if (TryLatDMS(input)) return true;
                     if (TryDecDeg(input, typeBox)) return true;
                     break;
                 case 2:
+                    if (TryLatLonDMS(input)) return true;
                     if (TryLonDMS(input)) return true;
                     if (TryDecDeg(input, typeBox)) return true;
                     break;

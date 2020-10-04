@@ -44,11 +44,20 @@ namespace SimpleCoordTranslator
         {
             if ((DMSLongitude.Length != 0) && (DMSLatitude.Length != 0))
                 ToSingleLine(DMSLatitude, DMSLongitude, DMSTextBox);
-            if ((DecLatitude != 0) && (DecLongitude != 0))
-                ToSingleLine(DecLatitude.ToString(DecFormat),
-                    DecLongitude.ToString(DecFormat), DECTextBox);
             if ((SCTLatitude.Length != 0) && (SCTLongitude.Length != 0))
                 ToSingleLine(SCTLatitude, SCTLongitude, SCTTextBox);
+            ToSingleLine(DecLatitude.ToString(DecFormat),
+                DecLongitude.ToString(DecFormat), DECTextBox);
+        }
+
+        private void ResetAllBoxes()
+        {
+            DecLatitude = DecLongitude = 0.0;
+            DMSLatitude = DMSLongitude = SCTLatitude = SCTLongitude = string.Empty;
+            DMSTextBox.BackColor = LatDMSTextBox.BackColor = LonDMSTextBox.BackColor = Color.White;
+            SCTTextBox.BackColor = LatSCTTextBox.BackColor = LonSCTTextBox.BackColor = Color.White;
+            DECTextBox.BackColor = LatDecTextBox.BackColor = LonDecTextBox.BackColor = Color.White;
+            UpdateBoxes();
         }
 
         private void ToSingleLine(string Lat, string Lon, TextBox tb)
@@ -61,8 +70,15 @@ namespace SimpleCoordTranslator
 
         private void PasteButton_Click(object sender, EventArgs e)
         {
-            SCTTextBox.Text = Clipboard.GetText();
-            ValidateTextBox(SCTTextBox);
+            string text = Clipboard.GetText().Trim();
+            if (text.Length != 0)
+            {
+                SCTTextBox.Text = text;
+                SCTTextBox.Modified = true;
+                SCTTextBox.Refresh();
+                ValidateTextBox(SCTTextBox);
+            }
+            else Common.SendMessage("Clipboard is empty.");
         }
 
         private void SendToClipboard(TextBox tb)
@@ -107,9 +123,17 @@ namespace SimpleCoordTranslator
 
         private void ValidateTextBox(TextBox tb)
         {
-            if (tb.Modified)
-                if (tb.TextLength != 0)
+            if (tb.Modified)            // Don't mess with textbox unless 'dirty'
+            { 
+                if (tb.TextLength != 0) // If empty, don't process, but return to white default
+                { 
                     if (ValidateDMS(tb)) UpdateBoxes();
+                }
+                else
+                {
+                    tb.BackColor = Color.White;
+                }
+            }
         }
 
         private void DECTextBox_Validated(object sender, EventArgs e)
@@ -209,6 +233,11 @@ namespace SimpleCoordTranslator
                 tb.BackColor = Color.Yellow;
             }
             return result;
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            ResetAllBoxes();
         }
     }
 }
