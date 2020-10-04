@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace SimpleCoordTranslator
 {
@@ -52,13 +53,27 @@ namespace SimpleCoordTranslator
             new Regex(DecDegree2, Options);
 
         // Have one calling routing and go to each regex
-        public static bool TryParseAnyDMS(string input)
+        public static bool TryParseAnyDMS(TextBox tb)
         {
-            if (TryLatLonDMS(input)) return true;
-            if (TryLatDMS(input)) return true;
-            if (TryLonDMS(input)) return true;
-            if (TryDecDeg(input)) return true;  // MUST call before DD2, or calculations will be in error
-            if (TryDecDeg2(input)) return true;
+            string input = tb.Text; string tbName = tb.Name;
+            int typeBox = 0;
+            if (tbName.IndexOf("Lat") != -1) typeBox = 1;
+            if (tbName.IndexOf("Lon") != -1) typeBox = 2;
+            switch (typeBox)
+                {
+                case 0:
+                    if (TryLatLonDMS(input)) return true;
+                    if (TryDecDeg2(input)) return true;
+                    break;
+                case 1:
+                    if (TryLatDMS(input)) return true;
+                    if (TryDecDeg(input, typeBox)) return true;
+                    break;
+                case 2:
+                    if (TryLonDMS(input)) return true;
+                    if (TryDecDeg(input, typeBox)) return true;
+                    break;
+            }
             return false;
         }
 
@@ -70,6 +85,7 @@ namespace SimpleCoordTranslator
             string inputTest = input.Trim();
             Regex rgx = degreeMinuteSecondRegex;
             Match m = rgx.Match(inputTest.Trim());
+            bool success = m.Success;
             if (m.Success)
             {
                 Debug.WriteLine("LatLon DMS successs...");
@@ -79,24 +95,25 @@ namespace SimpleCoordTranslator
                     Group grp = m.Groups[name];
                     Debug.WriteLine("Group {0}: {1}", name, grp.Value);
                 }
-                DMSToDD(input, rgx);
+                success = DMSToDD(input, rgx);
             }
             else
             {
                 Debug.WriteLine("LatLon Match failed.");
             }
-            return m.Success;
+            return success;
         }
 
         private static bool TryLatDMS(string input)
         {
             // Parses a latitude coordinate with degree, minute and seconds.
             // Returns null if no match, Returns decimal degrees if match
-            string[] names; bool validSuffix = true;
+            string[] names;
             string inputTest = input.Trim();
             Regex rgx = LatitudeRegex;
             Match m = rgx.Match(inputTest.Trim());
-            if (m.Success)
+            bool success = m.Success;
+            if (success)
             {
                 Debug.WriteLine("LatDMS success...");
                 names = rgx.GetGroupNames();
@@ -107,27 +124,29 @@ namespace SimpleCoordTranslator
                     if ((name == "latSuf") && (grp.Value.Trim().Length == 0))
                     {
                         Debug.WriteLine("latSuf value empty, Success value = " + m.Success.ToString());
-                        validSuffix = false;
+                        success = false;
                     }
                 }
-                DMSToDD(input, rgx);
+                success = DMSToDD(input, rgx);
             }
             else
             {
                 Debug.WriteLine("Latitude Match failed.");
+                success = false;
             }
-            return m.Success & validSuffix;
+            return success;
         }
 
         private static bool TryLonDMS(string input)
         {
             // Parses a latitude coordinate with degree, minute and seconds.
             // Returns null if no match, Returns decimal degrees if match
-            string[] names; bool validSuffix = true;
+            string[] names; 
             string inputTest = input.Trim();
             Regex rgx = new Regex(LongitudeDMS);
             Match m = rgx.Match(inputTest.Trim());
-            if (m.Success)
+            bool success = m.Success;
+            if (success)
             {
                 Debug.WriteLine("LonDMS success...");
                 names = rgx.GetGroupNames();
@@ -138,28 +157,30 @@ namespace SimpleCoordTranslator
                     if ((name == "lonSuf") && (grp.Value.Trim().Length == 0))
                     {
                         Debug.WriteLine("lonSuf value empty, Success value = " + m.Success.ToString());
-                        validSuffix = false;
+                        success = false;
                     }
                 }
-                DMSToDD(input, rgx);
+                success = DMSToDD(input, rgx);
             }
             else
             {
                 Debug.WriteLine("Longitude Match failed.");
+                success = false;
             }
-            return m.Success & validSuffix;
+            return success;
         }
 
-        public static bool TryDecDeg(string input, int Lat1Lon2 = 0)
+        public static bool TryDecDeg(string input, int Lat1Lon2)
         {
             // Parses a single coordinate with degrees in decimal format.
             // Returns null if no match, Returns decimal degrees if match
             // Returns failure if both coordinates are present
-            string[] names;
+            string[] names; double value;
             string inputTest = input.Trim();
             Regex rgx = decimalDegreesOneRegex;
             Match m = rgx.Match(inputTest.Trim());
-            if (m.Success)
+            bool success = m.Success;
+            if (success)
             {
                 Debug.WriteLine("Decimal Degree success...");
                 names = rgx.GetGroupNames();
@@ -167,25 +188,51 @@ namespace SimpleCoordTranslator
                 {
                     Group grp = m.Groups[name];
                     Debug.WriteLine("Group {0}: {1}", name, grp.Value);
-                    //if (name == "0")
-                    //{
-                    //    if (Lat1Lon2 == 1) DMS_DecDeg.DecLatitude = Convert.ToDouble(grp.Value);
-                    //    if (Lat1Lon2 == 2) DMS_DecDeg.DecLongitude = Convert.ToDouble(grp.Value);
-                    //}
+                }
+                value = Convert.ToDouble(m.Groups[0].Value);
+                switch (Lat1Lon2)
+                {
+                    case 1:     // Value is a Latitude
+                        if (Math.Abs(value) <= 90)
+                        {
+                            DMS_DecDeg.DecLatitude = value;
+                            success = true;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Latitude exceeds Abs 90 degrees.");
+                            success = false;
+                        }
+                        break;
+                    case 2:     // Value is a Longitude
+                        if (Math.Abs(value) <= 180)
+                        {
+                            DMS_DecDeg.DecLongitude = value;
+                            success = true;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Longitude exceeds Abs 180 degrees.");
+                            success = false;
+                        }
+                        break;
+                    default:
+                        success = false;
+                        break;
                 }
             }
             else
             {
                 Debug.WriteLine("Decimal Degree Match failed.");
             }
-            return m.Success;
+            return success;
         }
 
         private static bool TryDecDeg2(string input)
         {
             // Parses latitude and longitude coordinate with degrees in decimal format.
             // Returns null if no match, Returns decimal degrees if match
-            string[] names;
+            string[] names; 
             string inputTest = input.Trim();
             Regex rgx = decimalDegreesTwoRegex;
             Match m = rgx.Match(inputTest.Trim());
@@ -206,12 +253,13 @@ namespace SimpleCoordTranslator
             return m.Success;
         }
 
-        private static double[] DMSToDD(string input, Regex rgx)
+        private static bool DMSToDD(string input, Regex rgx)
         {
             // MODIFIES global decimal value of latitude and/or longitude
             // REQUIRES a successful "Try" to assure no runtime errors.
             string[] names;
             double[] Coords = new double[2];
+            bool validCoord = true;
             double LatNegate = 0.0;
             double LonNegate = 0.0;
             Debug.WriteLine("");
@@ -263,20 +311,34 @@ namespace SimpleCoordTranslator
                 }
                 if (LatNegate != 0)
                 {
-                    DMS_DecDeg.DecLatitude = Coords[0] * LatNegate;
-                    Debug.WriteLine("Lat: " + DMS_DecDeg.DecLatitude.ToString());
+                    double Lat = Coords[0] * LatNegate;
+                    if (Math.Abs(Lat) <= 90)
+                    {
+                        DMS_DecDeg.DecLatitude = Lat;
+                        validCoord = true;
+                        Debug.WriteLine("Lat: " + DMS_DecDeg.DecLatitude.ToString());
+                    }
+                    else validCoord = false;
+
                 }
-                if (LonNegate != 0)
+                if (LonNegate != 0 && validCoord)
                 {
-                    DMS_DecDeg.DecLongitude = Coords[1] * LonNegate;
-                    Debug.WriteLine("Lon: " + DMS_DecDeg.DecLongitude.ToString());
+                    double Lon = Coords[1] * LonNegate;
+                    if (Math.Abs(Lon) <= 180)
+                    {
+                        DMS_DecDeg.DecLongitude = Lon;
+                        validCoord = true;
+                        Debug.WriteLine("Lon: " + DMS_DecDeg.DecLongitude.ToString());
+                    }
+                    else validCoord = false;
                 }
             }
             else
             {
                 Debug.WriteLine("Match failed.");
+                validCoord = false;
             }
-            return Coords;
+            return validCoord;
         }
     }
 }

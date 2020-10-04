@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Diagnostics;
 using System.Drawing;
@@ -158,7 +157,6 @@ namespace SimpleCoordTranslator
             ValidateTextBox(LonSCTTextBox);
         }
 
-
         private void LatDecTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             NumberFormatInfo fi = CultureInfo.CurrentCulture.NumberFormat;
@@ -201,7 +199,7 @@ namespace SimpleCoordTranslator
 
         private bool ValidateDMS(TextBox tb)
         {
-            bool result = LatLons.TryParseAnyDMS(tb.Text);
+            bool result = LatLons.TryParseAnyDMS(tb);
             if (result)
             {
                 tb.BackColor = Color.White;
