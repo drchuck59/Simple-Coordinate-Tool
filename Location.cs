@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -35,7 +34,7 @@ namespace SimpleCoordTranslator
         private const string DecimalDegrees = @"^ (?<negate>(\-))?(?<Degrees>\d{1,3})(\.)? (?<Decimals>\d+)?$";
         private const string DecDegree2 = @"^(?<latNegate>(\-))?(?<latDegrees>\d{1,3})(\.)?(?<latDecimals>\d+)?(\s+)?(?<lonNegate>(\-))?(?<lonDegrees>\d{1,3})(\.)?(?<lonDecimals>\d+)?$";
         private const string LatLonDMS = @"^(?<latSuf>[NS])?(?<latDeg>\d{1,3})[D\*\u00B0\u00BA\-\.\s](?<latMin>\d{1,2})[M'\.\u2032\u2019\s](?<latSec>.+?)[\u0022\u2033\u201D]?(?<latSuf>[NS])?(\s+)?(?<lonSuf>[EW])?(?<lonDeg>\d{1,3})[D\*\u00B0\u00BA\-\.\s](?<lonMin>\d{1,2})[M'\.\u2032\u2019\s](?<lonSec>.+?)[\u0022\u2033\u201D]?(?<lonSuf>[EW])?$";
-        private const string LatitudeDMS = @"^(?<latSuf>[NS])?(?<latDeg>\d{1,3})[D\*\u00B0\u00BA\-\.\s](?<latMin>\d{1,2})[M'\.\u2032\u2019\s](?<lonSec>.+?)[\u0022\u2033\u201D]?(?<latSuf>[NS])?$";
+        private const string LatitudeDMS = @"^(?<latSuf>[NS])?(?<latDeg>\d{1,3})[D\*\u00B0\u00BA\-\.\s](?<latMin>\d{1,2})[M'\.\u2032\u2019\s](?<latSec>.+?)[\u0022\u2033\u201D]?(?<latSuf>[NS])?$";
         private const string LongitudeDMS = @"^(?<lonSuf>[EW])?(?<lonDeg>\d{1,3})[D\*\u00B0\u00BA\-\.\s](?<lonMin>\d{1,2})[M'\.\u2032\u2019\s](?<lonSec>.+?)[\u0022\u2033\u201D]?(?<lonSuf>[EW])?$";
         private const string IsoPattern = @"^\s*(?<latitude> [+-][0-9]{2,6}(?: \. [0-9]+)?)(?<longitude>[+-][0-9]{3,7}(?: \. [0-9]+)?)(?<altitude> [+-][0-9]+(?: \. [0-9]+)?)?/";
         // IsoPattern is untested
@@ -290,7 +289,7 @@ namespace SimpleCoordTranslator
                             Coords[0] += Convert.ToDouble(grp.Value) / 60.0;
                             break;
                         case "latSec":
-                            Coords[0] += Convert.ToDouble(grp.Value) / 3660.0;
+                            Coords[0] += Convert.ToDouble(grp.Value) / 3600.0;
                             break;
                         case "lonSuf":
                             if (grp.Value == "W")
@@ -305,7 +304,7 @@ namespace SimpleCoordTranslator
                             Coords[1] += Convert.ToDouble(grp.Value) / 60.0;
                             break;
                         case "lonSec":
-                            Coords[1] += Convert.ToDouble(grp.Value) / 3660.0;
+                            Coords[1] += Convert.ToDouble(grp.Value) / 3600.0;
                             break;
                         default:
                             break;

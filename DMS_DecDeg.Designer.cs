@@ -48,10 +48,10 @@
             this.PasteButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ResetButton = new System.Windows.Forms.Button();
             this.DMSHelpButton = new System.Windows.Forms.Button();
             this.LatDMSTextBox = new System.Windows.Forms.TextBox();
             this.LonDMSTextBox = new System.Windows.Forms.TextBox();
-            this.ResetButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -244,6 +244,18 @@
             this.label10.TabIndex = 20;
             this.label10.Text = "Double click any textbox to copy that textbox to clipboard.";
             // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(497, 57);
+            this.ResetButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(77, 45);
+            this.ResetButton.TabIndex = 29;
+            this.ResetButton.Text = "Reset all text boxes";
+            this.toolTip1.SetToolTip(this.ResetButton, "Pastes clipboard to line below");
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // DMSHelpButton
             // 
             this.DMSHelpButton.BackColor = System.Drawing.Color.Violet;
@@ -272,18 +284,6 @@
             this.LonDMSTextBox.Size = new System.Drawing.Size(153, 20);
             this.LonDMSTextBox.TabIndex = 2;
             this.LonDMSTextBox.Validated += new System.EventHandler(this.LonDMSTextBox_Validated);
-            // 
-            // ResetButton
-            // 
-            this.ResetButton.Location = new System.Drawing.Point(497, 57);
-            this.ResetButton.Margin = new System.Windows.Forms.Padding(2);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(77, 45);
-            this.ResetButton.TabIndex = 29;
-            this.ResetButton.Text = "Reset all text boxes";
-            this.toolTip1.SetToolTip(this.ResetButton, "Pastes clipboard to line below");
-            this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // DMS_DecDeg
             // 
@@ -315,7 +315,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "DMS_DecDeg";
-            this.Text = "Coordinate Converter";
+            this.Text = "Coordinate Converter v2.0.1";
             this.ResumeLayout(false);
             this.PerformLayout();
 
